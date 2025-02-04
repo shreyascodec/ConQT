@@ -1,0 +1,124 @@
+npx create -app <dynamic-form-builder>
+cd dynamic</dynamic-form-builder>
+npm start
+
+import React{usestate,useeffect} from "react";
+import"./App.css";
+
+//field types
+const FIELD_TYPES = {"Text Input", "Checkbox","Dropdown"};
+function App(){
+    const[fields, setfields] = usestate([]);
+    const[newfield, setNewfield] = usestate({
+        label:"";
+        type:FIELD_TYPEs[0],
+        options[],
+    });
+
+    useeffect(()=>{
+        //load saved form structure from localstorage
+        const savedform= JSON.parse(localstorage.getItem("FormFields"));
+        if (savedform){
+            setfields(savedform);
+        }
+    })
+    useeffect(()=>{
+        localstorage.setItem("formFields", JSON.stringify(fields));
+    },[fields]);
+
+    const handleAddField = () =>{
+        setFields((prevFields) =>[...prevFields, {...newfield}]);
+        setnewfield({label:"",type:FIELD_TYPES[0],options:[]});  
+    };
+    const handlefieldchange =(e) =>{
+        const{name,value}=e.target;
+        setnewfield((prevstate)=> ){
+            ...prevstate,
+            [name]:name ==="options"? value.split(","): value,
+        };
+    };
+    const handlepreview =() =>{
+        alert("Preview:"+ JSON.stringify(fields));
+    };
+    const renderfield = (field,index) =>{
+        switch(field.type) {
+            case "Text Input":
+            return(
+                <div key={index}>
+                <label>(field.label)</label>
+                <input type="text"/>    
+                </div>
+            );
+            case"Checkbox":
+            return(
+                <div key={index}>
+                <label>(field.label)</label>
+                <input.type="Checkbox"/>
+                </div>
+            );
+            case"Dropdown":
+            return(
+                <div key={index}>
+                <label>(label.field)</label>
+                <select>
+                    {field.options.map((option.idx) =>(
+                        <option key={idx} value={Option}>
+                        {option}
+                        </option>
+                    ))}
+                </select>
+                </div>
+            );
+            default:
+            return null;   
+        }
+    };
+    return(
+        <div classname ="App">
+        <h1>Dynamic Form Builder</h1>
+        <h2>Create Form Fields</h2>
+        </div>
+        <label>
+            Field label:
+            <input
+            type="text"
+            name="label"
+            value={Newfield.label}
+            onchange={handleFieldChange}/>
+        </label>
+        <label>
+            Field Type:
+            <select>
+            type="text"
+            name="label"
+            value={Newfield.label}
+            onchange={handleFieldChange}>
+            {FIELD_TYPES.map((type,idx)=>(
+                <option key={idx} value={type}>
+                    {type}
+                </option>
+            ))}
+        </select>
+        </label>
+
+        {newfield.type ==="Dropdown" &&(
+            <label>
+                Dropdown Options(comma separated):
+            <input
+            type="text"
+            name="options"
+            value={Newfield.options.join(",")}
+            onchange={handleFieldChange}/>]
+            </label>
+        )}
+        <button> onclick="{handleAddField} > Addfield(Field, index)" </button>
+    </div>
+
+    <div>
+        <h2>Form Preview</h2>
+        fields.map((field,index) => renderfield(field,index))
+        <button>onclick ={handlepreview}> Preview form</button>
+    </div>
+    )
+}
+export default app;
