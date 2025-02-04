@@ -1,0 +1,35 @@
+import react,{usestate} from"react";
+import"./searchabletable.css";
+
+const data=[
+    {id:1,name:"Alice", role:"Developer"}
+    {id:1,name:"Bob", role:"Developer"}
+    {id:1,name:"Charlie", role:"Product Manager"}
+];
+
+function SearchableTable()(
+    const[searchterm,setsearchterm] = useState("");
+    const[sortConfig, setsortConfig] = usestate({key:"name", direction:"asc"});
+
+const filtereddata = data.filter(item) =>
+item.name.toLowerCase().includes(searchTerm.toLowercase())
+);
+
+const sorteddata =[...filteredData].sort((a,b)=>{
+    if(a[sortconfig.key]<b [sortconfig.key]) return sortconfig.direction ==="asc"?-1:1;
+    if(a[sortconfig.key]>b [sortconfig.key]) return sortconfig.direction ==="asc"?1:-1;
+    return 0;
+});
+const handlesort =(key) =>(
+    let direction ="asc"
+    if (sortconfig.key=== key && sortconfig.direction ==="asc"){
+        direction = "desc"
+    }
+    setsortconfig({key,direction});
+);
+return(
+    <div classname="searchable-table">
+        <h1> Searchable table</h1>
+        
+    </div>
+)
